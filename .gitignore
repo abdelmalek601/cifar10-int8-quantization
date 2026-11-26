@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Research project files
+.venv_gpu/
+data/
+models/
