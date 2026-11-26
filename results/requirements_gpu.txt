@@ -19,3 +19,4 @@ tensorrt_cu12_libs==10.13.3.9.post1
 torch==2.8.0+cu128
 torchvision==0.23.0+cu128
 typing_extensions==4.16.0
+matplotlib==3.11.2
