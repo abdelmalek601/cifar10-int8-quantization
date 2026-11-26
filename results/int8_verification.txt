@@ -1,0 +1,80 @@
+C:\Users\dell\quant_project\src\verify_int8.py:11: UserWarning: Default qconfig of oneDNN backend with reduce_range of false may have accuracy issues on CPU without Vector Neural Network Instruction support.
+  model.qconfig = get_default_qconfig("onednn")
+C:\Users\dell\quant_project\src\verify_int8.py:12: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+For migrations of users: 
+1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+see https://github.com/pytorch/ao/issues/2259 for more details
+  model = prepare(model)
+C:\Users\dell\quant_project\src\verify_int8.py:19: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+For migrations of users: 
+1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+see https://github.com/pytorch/ao/issues/2259 for more details
+  model = convert(model)
+C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\ao\nn\quantized\modules\utils.py:78: UserWarning: torch.quantize_per_tensor, torch.quantize_per_channel and other quantized tensor creation functions that produce tensors with dtype torch.quint8, torch.qint8, and torch.qint32 are deprecated and will be removed in a future PyTorch release. Please see https://github.com/pytorch/pytorch/issues/184982 for more information. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\quantized\Quantizer.cpp:116.)
+  qweight = torch.quantize_per_channel(
+C:\Users\dell\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\_utils.py:506: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  device=storage.device,
+Backend: onednn
+Weight dtype: torch.qint8
+SmallCNN(
+  (quant): Quantize(scale=tensor([0.0161]), zero_point=tensor([124]), dtype=torch.quint8)
+  (conv1): QuantizedConvReLU2d(3, 32, kernel_size=(3, 3), stride=(1, 1), scale=0.026276730000972748, zero_point=0, padding=(1, 1))
+  (bn1): Identity()
+  (relu1): Identity()
+  (conv2): QuantizedConvReLU2d(32, 64, kernel_size=(3, 3), stride=(1, 1), scale=0.02418907918035984, zero_point=0, padding=(1, 1))
+  (bn2): Identity()
+  (relu2): Identity()
+  (conv3): QuantizedConvReLU2d(64, 128, kernel_size=(3, 3), stride=(1, 1), scale=0.018408088013529778, zero_point=0, padding=(1, 1))
+  (bn3): Identity()
+  (relu3): Identity()
+  (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (fc): QuantizedLinear(in_features=2048, out_features=10, scale=0.13579772412776947, zero_point=106, qscheme=torch.per_channel_affine)
+  (dequant): DeQuantize()
+)
+USDT:2026-11-18 20:24:41 2052:21268 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:39] profiler_start
+onednn_verbose,v1,info,oneDNN v3.13.3 (commit b38f97eb6f2173513112f15a0481750b8a66e901)
+onednn_verbose,v1,info,cpu,runtime:OpenMP,nthr:14
+onednn_verbose,v1,info,cpu,isa:Intel AVX2 with Intel DL Boost
+onednn_verbose,v1,info,gpu,runtime:none
+onednn_verbose,v1,info,graph,backend,0:dnnl_backend
+onednn_verbose,v1,primitive,info,template:operation,engine,primitive,implementation,prop_kind,memory_descriptors,attributes,auxiliary,problem_desc,exec_time
+onednn_verbose,v1,graph,info,template:operation,engine,partition_id,partition_kind,op_names,data_formats,logical_tensors,fpmath_mode,implementation,backend,exec_time
+onednn_verbose,v1,cpu,debuginfo,platform,pcore_cache,L1d:48KB,L2:1280KB,L3:24MB(10cores,2457KB/core),smt:2
+onednn_verbose,v1,cpu,debuginfo,platform,lp_core_cache,L1d:32KB,L2:2048KB(4cores,512KB/core),L3:24MB(20cores,1228KB/core),smt:1
+onednn_verbose,v1,cpu,debuginfo,platform,per_core_cache(min),L1d:32KB,L2:512KB,L3:1228KB
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit:uni,undef,src:s8:p:blocked:AcdB16a4b::f8:zpm1 dst:s8:p:blocked:AcdB32a4b::f8:zpm1,attr-scratchpad:user,,32x3x3x3,0.0165
+onednn_verbose,v1,primitive,exec,cpu,convolution,brg_conv_fwd:avx2_vnni,forward_inference,src:u8::blocked:acdb::f0 wei:s8:ap:blocked:AcdB32a4b::f8:zpm1 bia:f32:a:blocked:a::f0 dst:u8::blocked:acdb::f0,attr-scratchpad:user attr-scales:src0:0:f32+dst:0:f32+wei:1:f32 attr-zero-points:src0:0:s32 attr-post-ops:eltwise_relu,alg:convolution_direct,mb1_ic3oc32_ih32oh32kh3sh1dh0ph1_iw32ow32kw3sw1dw0pw1,0.8569
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit:uni,undef,src:s8::blocked:AcdB32a4b::f8:zpm1 dst:s8::blocked:AcdB32a4b::f0,attr-scratchpad:user,,64x32x3x3,0.0133
+onednn_verbose,v1,primitive,exec,cpu,convolution,brg_conv_fwd:avx2_vnni,forward_inference,src:u8::blocked:acdb::f0 wei:s8:a:blocked:AcdB32a4b::f0 bia:f32:a:blocked:a::f0 dst:u8::blocked:acdb::f0,attr-scratchpad:user attr-scales:src0:0:f32+dst:0:f32+wei:1:f32 attr-post-ops:eltwise_relu,alg:convolution_direct,mb1_ic32oc64_ih16oh16kh3sh1dh0ph1_iw16ow16kw3sw1dw0pw1,0.0188
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit:uni,undef,src:s8::blocked:AcdB32a4b::f8:zpm1 dst:s8::blocked:AcdB32a4b::f0,attr-scratchpad:user,,128x64x3x3,0.0102
+onednn_verbose,v1,primitive,exec,cpu,convolution,brg_conv_fwd:avx2_vnni,forward_inference,src:u8::blocked:acdb::f0 wei:s8:a:blocked:AcdB32a4b::f0 bia:f32:a:blocked:a::f0 dst:u8::blocked:acdb::f0,attr-scratchpad:user attr-scales:src0:0:f32+dst:0:f32+wei:1:f32 attr-post-ops:eltwise_relu,alg:convolution_direct,mb1_ic64oc128_ih8oh8kh3sh1dh0ph1_iw8ow8kw3sw1dw0pw1,0.0167
+onednn_verbose,v1,primitive,exec,cpu,reorder,jit:uni,undef,src:s8:p:blocked:BA16a64b4a::f8:zpm2 dst:s8:p:blocked:BA16a64b4a::f0,attr-scratchpad:user,,2048x10,0.1027
+onednn_verbose,v1,primitive,exec,cpu,matmul,brg_matmul:avx2_vnni,undef,src:u8:a:blocked:ab::f0 wei:s8:p:blocked:BA16a64b4a::f0 bia:f32::blocked:ab::f0_mask2 dst:u8::blocked:ab::f0,attr-scratchpad:user attr-scales:src0:0:f32+dst:0:f32+wei:2:f32 attr-zero-points:dst:0:s32,,1x2048:2048x10,0.5286
+USDT:2026-11-18 20:24:41 2052:21268 C:\actions-runner\_work\pytorch\pytorch\third_party\kineto\libkineto\src\SyncActivityProfilerHandler.cpp:46] profiler_stop
+---------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                             Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+---------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+           quantized::conv2d_relu        70.19%      20.405ms        72.23%      20.996ms       6.999ms             3  
+                quantized::linear        13.23%       3.846ms        13.25%       3.851ms       3.851ms             1  
+                 aten::max_pool2d         0.05%      15.400us         7.67%       2.231ms     743.633us             3  
+       aten::quantized_max_pool2d         7.52%       2.187ms         7.62%       2.215ms     738.500us             3  
+                    aten::flatten         1.22%     354.100us         2.61%     757.400us     757.400us             1  
+        aten::quantize_per_tensor         2.16%     628.800us         2.16%     628.800us     628.800us             1  
+                 aten::contiguous         0.47%     135.700us         1.94%     563.400us     563.400us             1  
+                      aten::clone         1.48%     430.600us         1.52%     442.300us     221.150us             2  
+                 aten::dequantize         1.40%     406.300us         1.41%     411.200us     411.200us             1  
+               aten::_unsafe_view         1.34%     388.700us         1.34%     388.700us     388.700us             1  
+                       aten::item         0.65%     190.000us         0.67%     193.900us      96.950us             2  
+    aten::_empty_affine_quantized         0.21%      62.100us         0.21%      62.100us       6.900us             9  
+                    aten::q_scale         0.02%       5.100us         0.02%       5.100us       0.567us             9  
+                      aten::empty         0.02%       4.900us         0.02%       4.900us       4.900us             1  
+               aten::q_zero_point         0.02%       4.500us         0.02%       4.500us       0.500us             9  
+        aten::_local_scalar_dense         0.01%       3.900us         0.01%       3.900us       1.950us             2  
+                    aten::qscheme         0.00%       1.000us         0.00%       1.000us       0.167us             6  
+---------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 29.070ms
+

@@ -1,0 +1,246 @@
+{"Layers": [{
+  "Name": "/conv1/Conv + /relu1/Relu",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "input",
+    "Location": "Device",
+    "Dimensions": [128,3,32,32],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "/relu1/Relu_output_0",
+    "Location": "Device",
+    "Dimensions": [128,32,32,32],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 32,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 864},
+  "Bias": {"Type": "Float", "Count": 32},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "ampere_scudnn_128x32_relu_small_nn_v1",
+  "TacticValue": "0xa8609adc4e0ceb90",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /conv1/Conv]\u001e[ONNX Layer: /relu1/Relu]"
+},{
+  "Name": "/pool/MaxPool",
+  "LayerType": "CaskPooling",
+  "Inputs": [
+  {
+    "Name": "/relu1/Relu_output_0",
+    "Location": "Device",
+    "Dimensions": [128,32,32,32],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "/pool/MaxPool_output_0",
+    "Location": "Device",
+    "Dimensions": [128,32,16,16],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Pooling",
+  "PoolingType": "MAX",
+  "WindowSize": [2,2],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "BlendFactor": 0,
+  "AverageCountExcludesPadding": 1,
+  "TacticName": "sm50_xmma_pooling_tiled_FP32NCHW_kMAX_tP2_tQ32_tR2_tS2_tU2_tV2_tUnroll6_tThreads256",
+  "TacticValue": "0x60eceb67eff69444",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /pool/MaxPool]"
+},{
+  "Name": "/conv2/Conv + /relu2/Relu",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "/pool/MaxPool_output_0",
+    "Location": "Device",
+    "Dimensions": [128,32,16,16],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "/relu2/Relu_output_0",
+    "Location": "Device",
+    "Dimensions": [128,64,16,16],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 18432},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_wngd_f32f32_f32_f32_nchwkcrs_nchw_tilesize8x16x64x8_warpsize8x1x1_wngd2x2",
+  "TacticValue": "0x0190806602534cfd",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /conv2/Conv]\u001e[ONNX Layer: /relu2/Relu]"
+},{
+  "Name": "/pool_1/MaxPool",
+  "LayerType": "CaskPooling",
+  "Inputs": [
+  {
+    "Name": "/relu2/Relu_output_0",
+    "Location": "Device",
+    "Dimensions": [128,64,16,16],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "/pool_1/MaxPool_output_0",
+    "Location": "Device",
+    "Dimensions": [128,64,8,8],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Pooling",
+  "PoolingType": "MAX",
+  "WindowSize": [2,2],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "BlendFactor": 0,
+  "AverageCountExcludesPadding": 1,
+  "TacticName": "sm50_xmma_pooling_tiled_FP32NCHW_kMAX_tP2_tQ16_tR2_tS2_tU2_tV2_tUnroll4_tThreads128",
+  "TacticValue": "0xdd39499496c9cc38",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /pool_1/MaxPool]"
+},{
+  "Name": "/conv3/Conv + /relu3/Relu",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "/pool_1/MaxPool_output_0",
+    "Location": "Device",
+    "Dimensions": [128,64,8,8],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "/relu3/Relu_output_0",
+    "Location": "Device",
+    "Dimensions": [128,128,8,8],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 73728},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize128x64x8_stage2_warpsize2x2x1_g1_ffma_t1r3s3_aligna4_alignc4_beta0_packed_stride",
+  "TacticValue": "0x3712e3e595645874",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /conv3/Conv]\u001e[ONNX Layer: /relu3/Relu]"
+},{
+  "Name": "/pool_2/MaxPool",
+  "LayerType": "CaskPooling",
+  "Inputs": [
+  {
+    "Name": "/relu3/Relu_output_0",
+    "Location": "Device",
+    "Dimensions": [128,128,8,8],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "/pool_2/MaxPool_output_0",
+    "Location": "Device",
+    "Dimensions": [128,128,4,4],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Pooling",
+  "PoolingType": "MAX",
+  "WindowSize": [2,2],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "BlendFactor": 0,
+  "AverageCountExcludesPadding": 1,
+  "TacticName": "sm50_xmma_pooling_nd_NCDHW_kMAX_kGENERIC_3D_POOLING_MODE_kFLOAT_0",
+  "TacticValue": "0x5faf4a0a8a5670ed",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /pool_2/MaxPool]"
+},{
+  "Name": "__mye169_0_myl6_0",
+  "LayerType": "shape_call",
+  "Inputs": [],
+  "Outputs": [],
+  "TacticName": "",
+  "StreamId": 0,
+  "Metadata": ""
+},{
+  "Name": "/fc/Gemm_myl6_1",
+  "LayerType": "gemm",
+  "Inputs": [
+  {
+    "Name": "/pool_2/MaxPool_output_0",
+    "Dimensions": [-1,2048],
+    "Format/Datatype": "Float"
+  }],
+  "Outputs": [
+  {
+    "Name": "output",
+    "Dimensions": [-1,10],
+    "Format/Datatype": "Float"
+  }],
+  "TacticName": "sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize128x32x8_stage3_warpsize2x2x1_ffma_aligna4_alignc4",
+  "StreamId": 0,
+  "Metadata": "[ONNX Layer: /fc/Gemm]"
+}],
+"Bindings": ["input"
+,"output"
+]}

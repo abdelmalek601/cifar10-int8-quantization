@@ -1,0 +1,40 @@
+CPU ACCURACY (%)
+fp32_acc: Mean = 82.3000, SD = 0.2663
+int8_acc: Mean = 82.3440, SD = 0.2811
+
+GPU ACCURACY (%)
+FP16: Mean = 82.2940, SD = 0.2616, Seeds = 5
+FP32: Mean = 82.3000, SD = 0.2663, Seeds = 5
+INT8: Mean = 82.3200, SD = 0.2666, Seeds = 5
+
+CPU LATENCY (ms)
+1 | FP32: Mean = 0.3497, SD = 0.0084, Seeds = 5
+1 | Fused FP32: Mean = 0.2837, SD = 0.0044, Seeds = 5
+1 | INT8: Mean = 0.3485, SD = 0.0152, Seeds = 5
+128 | FP32: Mean = 14.6795, SD = 0.3812, Seeds = 5
+128 | Fused FP32: Mean = 14.0975, SD = 0.4733, Seeds = 5
+128 | INT8: Mean = 5.6715, SD = 0.1046, Seeds = 5
+
+GPU LATENCY (ms)
+1 | FP16: Mean = 0.0938, SD = 0.0251, Seeds = 5
+1 | FP32: Mean = 0.1216, SD = 0.0383, Seeds = 5
+1 | INT8: Mean = 0.0736, SD = 0.0176, Seeds = 5
+128 | FP16: Mean = 0.3678, SD = 0.0051, Seeds = 5
+128 | FP32: Mean = 1.0058, SD = 0.0663, Seeds = 5
+128 | INT8: Mean = 0.2045, SD = 0.0029, Seeds = 5
+
+CPU ADDITIONAL MEMORY (MiB)
+1 | FP32: Mean = 5.9734, SD = 0.1632, Seeds = 5
+1 | Fused FP32: Mean = 6.5961, SD = 0.0102, Seeds = 5
+1 | INT8: Mean = 14.2063, SD = 0.1687, Seeds = 5
+128 | FP32: Mean = 66.8344, SD = 0.1154, Seeds = 5
+128 | Fused FP32: Mean = 68.1109, SD = 0.1814, Seeds = 5
+128 | INT8: Mean = 21.3883, SD = 0.1067, Seeds = 5
+
+GPU ADDITIONAL MEMORY (MiB)
+1 | FP16: Mean = 17.6000, SD = 0.8944, Seeds = 5
+1 | FP32: Mean = 28.4000, SD = 0.8944, Seeds = 5
+1 | INT8: Mean = 12.0000, SD = 0.0000, Seeds = 5
+128 | FP16: Mean = 37.6000, SD = 0.8944, Seeds = 5
+128 | FP32: Mean = 48.4000, SD = 0.8944, Seeds = 5
+128 | INT8: Mean = 32.0000, SD = 0.0000, Seeds = 5
